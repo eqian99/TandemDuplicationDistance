@@ -6,16 +6,19 @@ def solve(s):
     '''this is the template solve function. please place your code here
     it should return an integer with value n which maps to the number
     of steps it takes to get to the initial string'''
-    #to do fill in code to get n
+    new_s = s[0]
+    for i in range(len(s)):
+        if s[i] != s[i+1]:
+            new_s += s[i+1]
+    n = len(new_s)
     return n
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2: 
+    if len(sys.argv) < 2:
         print("using this file requires an input string \n python solver.py 1010 \n will run the program to solve for string 1010")
-    else:  
+    else:
         s = sys.argv[1]
         start_time = time.time()
         val = solve(s)
-        total_time = time.time() - start_time 
+        total_time = time.time() - start_time
         print('solved for string {} in {} steps taking {:1.4f} seconds'.format(s, val, time.time() - start_time))
-    
