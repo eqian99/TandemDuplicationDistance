@@ -1,17 +1,24 @@
 import argparse
 import sys
 import time
+
 def solve(s):
-    n = 0
-    '''this is the template solve function. please place your code here
-    it should return an integer with value n which maps to the number
-    of steps it takes to get to the initial string'''
-    new_s = s[0]
+    min = len(s)
+    return helper_solve(s, 0, min)
+
+def helper_solve(s, count, min):
+    if s == '0' or s=='1' or s=='01' or s=='10' or s=='101' or s=='010':
+        return count
+    # pls fix below does not work at all
     for i in range(len(s)):
-        if s[i] != s[i+1]:
-            new_s += s[i+1]
-    n = len(new_s)
-    return n
+        for j in range(1, len(s) - i):
+            if i + 2*j <= len(s):
+                if s[i:i + j] == s[i + j:i + 2*j]:
+                    newstr = s[:i+j] + s[i + 2*j:]
+                    temp = helper_solve(newstr, count + 1, min)
+                    if min >= temp:
+                        min = temp
+    return min
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
