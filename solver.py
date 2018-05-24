@@ -7,27 +7,52 @@ def solve(s):
     left_dist = {}
     for i in ['0', '01', '1', '10', '101', '010']:
         left_dist[i] = 0
+<<<<<<< Updated upstream
     helper_solve(s, 0, min, left_dist)
+=======
+    result = helper_solve2(s, 0, min, left_dist)
+>>>>>>> Stashed changes
     print(left_dist)
-    return left_dist[s]
+    return result
 
 # Our implementation of our algorithm that uses dynamic programming
-# to find the duplication distances of strings. 
+# to find the duplication distances of strings.
 def helper_solve(s, count, min, left_dist):
     for i in range(len(s)):
         for j in range(1, len(s) - i):
             if (i + 2*j) <= len(s):
                 if s[i:i + j] == s[i + j:i + 2*j]: # deduplication of substrings of s
                     newstr = s[:i+j] + s[i + 2*j:]
-                    if newstr in left_dist.keys(): # if substring is stored in dictionary
-                        if s in left_dist.keys() and left_dist[s] > left_dist[newstr] + 1:
-                            left_dist[s] = left_dist[newstr] + 1
-                            return left_dist[s]
-                        else:
-                            return left_dist[newstr] + 1
-                    else: # else substring is not stored in dictionary, recursively call helper_solve
-                        left_dist[s] = helper_solve(newstr, count + 1, min, left_dist) + 1
-    return left_dist[s]
+                    past_dist[newstr] = count + 1
+                    temp = helper_solve(newstr, count + 1, min, past_dist, left_dist)
+                    #print(s + ' -> ' + newstr)
+                    if s in left_dist.keys():
+                        if temp - count < left_dist[s]:
+                            left_dist[s] = temp - count
+                    else:
+                        left_dist[s] = temp - count
+
+                    if min >= temp:
+                        min = temp
+            else:
+                break
+    return min
+
+def helper_solve2(s, count, min, left_dist):
+    min = len(s)
+    for i in range(len(s)):
+        for j in range(1, len(s) - i):
+            if s[i:i + j] == s[i + j:i + 2*j]:
+                newstr = s[:i+j] + s[i + 2*j:]
+                if newstr in left_dist.keys():
+                    if left_dist[newstr] + 1 < min:
+                        min = left_dist[newstr] + 1
+                else:
+                    dist = helper_solve2(newstr, count + 1, min, left_dist) + 1
+                    if dist + 1 < min:
+                        min = dist + 1
+    left_dist[s] = min
+    return min
 
 # Our first implementation of a helper function to find the duplicate distance.
 # It works, but is much slower for longer strings than our current helper_solve
