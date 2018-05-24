@@ -33,13 +33,10 @@ def helper_solve(s, count, min, left_dist):
 # It works, but is much slower for longer strings than our current helper_solve
 # function, since it does not use a dictionary to memoize deduplicated substrings.
 def slower_solve(s, count, min):
-    if s == '0' or s=='1' or s=='01' or s=='10' or s=='101' or s=='010':
+    min = 9999999
+    if s in ['0', '01', '1', '10', '101', '010']:
         return count
      for i in range(len(s)):
-        if s[i] != s[i+1]:
-            new_s += s[i+1]
-    n = len(new_s)
-    return n
         for j in range(1, len(s) - i):
             if i + 2*j <= len(s):
                 if s[i:i + j] == s[i + j:i + 2*j]:
