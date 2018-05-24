@@ -1,4 +1,5 @@
-# Please in your solution describe your algorithm and approach. Discuss pros and cons and what things you like/dislike about your algorithm
+# Please in your solution describe your algorithm and approach. 
+# Discuss pros and cons and what things you like/dislike about your algorithm
 
 # We chose to start from the given string and go backwards to find the seed.
 # We've implemented a helper function that finds the duplication distance of
