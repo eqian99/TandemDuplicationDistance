@@ -1,3 +1,5 @@
+# Please in your solution describe your algorithm and approach. Discuss pros and cons and what things you like/dislike about your algorithm
+
 # We chose to start from the given string and go backwards to find the seed. 
 # We've implemented a helper function that finds the duplication distance of
 # strings recursively. The helper function uses a dynamic programming to memoize, 
@@ -32,5 +34,3 @@
 # computations must be done, so the efficiency of our algorithm can 
 # still be improved upon, and we could further reduce the number of
 # cases checked by the tree. 
-
-# Please in your solution describe your algorithm and approach. Discuss pros and cons and what things you like/dislike about your algorithm
